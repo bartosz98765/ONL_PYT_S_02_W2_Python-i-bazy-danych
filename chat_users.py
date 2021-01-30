@@ -15,7 +15,7 @@ parser.add_argument("-l", "--list", help="list messages", action="store_true")
 # try:
 args = parser.parse_args()
 if args.list:
-    print('Users list:')
+    print('List of users:')
     conn = connect()
     cursor1 = conn.cursor()
     all_user_list = models.User.load_all_users(cursor1)

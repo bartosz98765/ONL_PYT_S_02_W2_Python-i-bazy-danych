@@ -136,10 +136,10 @@ class Message:
             return True
 
     @staticmethod
-    def load_all_messages(cursor):
+    def load_all_messages(cursor, login_user_id):
         all_loaded_messages = []
-        sql_query = """
-                    SELECT * FROM messages;
+        sql_query = f"""
+                    SELECT * FROM messages WHERE user_to_id={login_user_id};
                     """
         cursor.execute(sql_query)
         data = cursor.fetchall()
@@ -153,18 +153,31 @@ class Message:
             return all_loaded_messages
         return None
 
-    @staticmethod
-    def start():
-        conn = connect()
-        cursor1 = conn.cursor()
-        all_msg_list = Message.load_all_messages(cursor1)
-        conn.close()
-        for row in all_msg_list:
-            print(row)
+    # @staticmethod
+    # def start():
+    #     conn = connect()
+    #     cursor1 = conn.cursor()
+    #     all_msg_list = Message.load_all_messages(cursor1)
+    #     conn.close()
+    #     for row in all_msg_list:
+    #         print(row)
 
 
 if __name__ == '__main__':
     pass
+
+#MESSAGES LIST SENT TO USER
+    # conn = connect()
+    # cursor1 = conn.cursor()
+    # load_user = User.load_user_by_username(cursor1, 'Olga')
+    # conn.close()
+    #
+    # conn = connect()
+    # cursor2 = conn.cursor()
+    # all_user_messages = Message.load_all_messages(cursor2, load_user.id)
+    # conn.close()
+    # for row in all_user_messages:
+    #     print(f"Wiadomość {row[0]}: Czas wysłania: {row[4]}\n Treść wiadomości: {row[3]}\n")
 
 #NEW USER
     # user1 = User(username='Janina', password='moje_haslo')
@@ -227,7 +240,9 @@ if __name__ == '__main__':
     #     conn.close()
     # else:
     #     print("Użytkownik nie istnieje")
-    # message1 = Message(from_id=11, to_id=22, text='Moja nowa wiadomość')
+    #
+#TEST: SAVE_NEW_MESSAGE
+    # message1 = Message(from_id=1, to_id=2, text='Najnowsza wiadomość do Ciebie')
     # conn = connect()
     # cursor1 = conn.cursor()
     # message1.save_message_to_db(cursor1)
