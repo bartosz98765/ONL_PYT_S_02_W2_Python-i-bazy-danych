@@ -1,11 +1,11 @@
 new_database_query = """
-CREATE DATABASE chat
+CREATE DATABASE chat_test
 """
 
 new_table_user_query = """
 CREATE TABLE users(
 id serial, 
-username varchar(255),
+username varchar(255) UNIQUE,
 hashed_password varchar(80),
 PRIMARY KEY(id)
 )
@@ -16,7 +16,8 @@ CREATE TABLE messages(
 id serial,
 user_from_id serial,
 user_to_id serial,
-creation_date timestamp,
+text text,
+creation_date timestamp DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY(id)
 )
 """

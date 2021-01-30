@@ -2,11 +2,9 @@ from dbconnection import connect
 from sql_query_create import sql_query_create_list
 
 
-def create_db(query_list=None):
+def create_db(cursor, query_list=None):
     if query_list == None:
         query_list = sql_query_create_list
-        conn = connect()
-        cursor = conn.cursor()
         for query in query_list:
             try:
                 cursor.execute(query)
@@ -17,4 +15,7 @@ def create_db(query_list=None):
 
 
 if __name__ == '__main__':
-    create_db()
+    conn = connect()
+    cursor1 = conn.cursor()
+    create_db(cursor1)
+    conn.close()
