@@ -173,7 +173,7 @@ if __name__ == '__main__':
     # user1.save_to_db(cursor1)
     # load_user = User.load_user_by_id(cursor1, 22)
     # conn.close()
-
+    #
 
 
 
